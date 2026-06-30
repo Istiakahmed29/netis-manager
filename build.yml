@@ -1,0 +1,54 @@
+name: Build Android APK
+
+# This runs automatically every time you upload (push) code to GitHub.
+# It builds your Flutter app into an installable APK file — for free,
+# using GitHub's own computers. You don't need Flutter installed anywhere.
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch: # lets you also trigger it manually with a button
+
+jobs:
+  build:
+    name: Build APK
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1. Download your code onto GitHub's build computer
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # 2. Install Java (required by Android builds)
+      - name: Set up Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'zulu'
+          java-version: '17'
+
+      # 3. Install Flutter
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.24.0'
+          channel: 'stable'
+
+      # 4. Download all the app's dependencies
+      - name: Install dependencies
+        run: flutter pub get
+
+      # 5. Run tests (optional safety check — won't block the build if you remove this)
+      - name: Run tests
+        run: flutter test
+        continue-on-error: true
+
+      # 6. Build the actual installable APK
+      - name: Build APK
+        run: flutter build apk --release
+
+      # 7. Upload the finished APK so you can download it from the GitHub website
+      - name: Upload APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: netis-manager-apk
+          path: build/app/outputs/flutter-apk/app-release.apk

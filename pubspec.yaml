@@ -1,0 +1,49 @@
+name: netis_manager
+description: NETIS WF2409E Router Device Manager - Block and unblock connected devices.
+publish_to: 'none'
+version: 1.0.0+1
+
+environment:
+  sdk: '>=3.0.0 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  # State management
+  flutter_riverpod: ^2.4.9
+  riverpod_annotation: ^2.3.3
+
+  # HTTP client - used to replay the router's web interface requests
+  dio: ^5.4.0
+  cookie_jar: ^4.0.8
+  dio_cookie_manager: ^3.1.1
+
+  # Secure credential storage (Android Keystore backed)
+  flutter_secure_storage: ^9.0.0
+
+  # Local network / connectivity
+  network_info_plus: ^5.0.0
+  connectivity_plus: ^5.0.0
+
+  # UI
+  material_color_utilities: ^0.8.0
+  google_fonts: ^6.1.0
+  shimmer: ^3.0.0
+  flutter_animate: ^4.3.0
+
+  # HTML parsing - needed to scrape router's web interface
+  html: ^0.15.4
+
+  # Logging
+  logger: ^2.0.2+1
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^3.0.0
+  build_runner: ^2.4.7
+  riverpod_generator: ^2.3.9
+
+flutter:
+  uses-material-design: true

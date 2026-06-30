@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Network security configuration for the NETIS Manager app.
+
+  The NETIS WF2409E only serves HTTP (no HTTPS). By default Android 9+
+  blocks cleartext HTTP traffic. This config allows it ONLY for the known
+  router IP ranges — not for the rest of the internet.
+
+  If your router uses a different subnet, add it here.
+-->
+<network-security-config>
+    <domain-config cleartextTrafficPermitted="true">
+        <!-- Most common NETIS default gateway -->
+        <domain includeSubdomains="false">192.168.1.1</domain>
+        <!-- Alternative gateway -->
+        <domain includeSubdomains="false">192.168.0.1</domain>
+        <!-- Other candidates tried during discovery -->
+        <domain includeSubdomains="false">10.0.0.1</domain>
+        <domain includeSubdomains="false">192.168.2.1</domain>
+    </domain-config>
+</network-security-config>
